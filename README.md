@@ -1,11 +1,14 @@
-# My Project
+# Frontend Assignment - Dinesh Katariya
 
-This project is a simple yet powerful application built using React and Tailwind CSS. I've used Tailwind CSS blocks to quickly generate the UI.
+This project is a assignment for job interview.
 
 ![Project Screenshot](./src/assets/banner.png)
 ![Project Screenshot](./src/assets/capsule.png)
 ![Project Screenshot](./src/assets/modal.png)
 
+## Vite 
+
+used to create this assignment project. it's a faster tool suggested by react.dev react docs to build row reactjs project.
 
 ## Tailwind CSS Blocks
 
