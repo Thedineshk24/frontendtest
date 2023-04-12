@@ -7,6 +7,8 @@ const DataGrid = () => {
     const [selectedCapsule, setSelectedCapsule] = useState(null);
     const [dialogOpen, setDialogOpen] = useState(false);
     const dialogRef = useRef(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [dataPerPage] = useState(10);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -48,11 +50,22 @@ const DataGrid = () => {
         );
     });
 
+    const indexOfLastData = currentPage * dataPerPage;
+    const indexOfFirstData = indexOfLastData - dataPerPage;
+    const currentData = filteredData.slice(indexOfFirstData, indexOfLastData);
+
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(filteredData.length / dataPerPage); i++) {
+        pageNumbers.push(i);
+    }
+
     return (
         <div className="container mx-auto mb-10">
             <Search onSearch={setSearchTerm} />
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {filteredData.map((item, index) => (
+                {currentData.map((item, index) => (
                     <div
                         key={index}
                         className="bg-white rounded-lg shadow-md p-6 cursor-pointer"
@@ -74,7 +87,7 @@ const DataGrid = () => {
                         <p className="mb-2"><strong>Landings:</strong> {selectedCapsule.landings}</p>
                         <button
                             className="mt-4 bg-blue-500 text-white px-4 py-2 rounded
- focus:outline-none"
+focus:outline-none"
                             onClick={() => setDialogOpen(false)}
                         >
                             Close
@@ -82,8 +95,23 @@ const DataGrid = () => {
                     </div>
                 </div>
             )}
+
+            <div className="flex justify-center mt-10">
+                <nav className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                    {pageNumbers.map((number) => (
+                        <a
+                            key={number}
+                            onClick={() => paginate(number)}
+                            className={`${currentPage === number ? 'bg-blue-500 text-white' : 'bg-white text-gray-500'
+                                } relative inline-flex items-center px-4 py-2 border border-gray-300 font-medium hover:bg-gray-50 focus:z-10 focus:outline-none`}
+                        >
+                            {number}
+                        </a>
+                    ))}
+                </nav>
+            </div>
         </div>
-    )
-}
+    );
+};
 
 export default DataGrid;
