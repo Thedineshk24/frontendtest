@@ -21,6 +21,8 @@ Tailwind CSS Blocks are pre-built UI components that help in accelerating the de
 3. Paste the code into your React component.
 4. Modify the code as necessary to suit your project's requirements.
 
+## logic for pagination
+found it out half through internet and half through chatGPT
 ## Adding a Screenshot to the Markdown File
 
 To add a screenshot to the markdown file, follow these steps:
